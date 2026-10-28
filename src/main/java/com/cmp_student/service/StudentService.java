@@ -29,11 +29,11 @@ public class StudentService {
                 .bodyToMono(StudentRsDto.class);
     }
 
-    public Flux<StudentDto> findAll() {
+    public Flux<StudentRsDto> findAll() {
         return webClient.get()
                 .uri(baseUrlPlayer)
                 .retrieve()
-                .bodyToFlux(StudentDto.class);
+                .bodyToFlux(StudentRsDto.class);
     }
 
 }
