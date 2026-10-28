@@ -11,8 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cmp_student.dto.PostDto;
 import com.cmp_student.dto.StudentDto;
 import com.cmp_student.dto.StudentRsDto;
+<<<<<<< HEAD
 import com.cmp_student.service.PostService;
+=======
+import com.cmp_student.dto.UserPostRsDto;
+>>>>>>> 3874107ad6775371d50942c776302c390be8014b
 import com.cmp_student.service.StudentService;
+import com.cmp_student.service.UserPostService;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -22,11 +27,11 @@ import reactor.core.publisher.Mono;
 public class StudentController {
 
     private final StudentService studentService;
-    private final PostService postService;
+    private final UserPostService userPostService;
 
-    public StudentController(StudentService studentService, PostService postService) {
+    public StudentController(StudentService studentService, UserPostService userPostService) {
         this.studentService = studentService;
-        this.postService = postService;
+        this.userPostService = userPostService;
     }
 
     @PostMapping
@@ -35,13 +40,13 @@ public class StudentController {
     }
 
     @GetMapping
-    public Flux<StudentDto> findAll() {
+    public Flux<StudentRsDto> findAll() {
         return studentService.findAll();
     }
 
-    @GetMapping("/posts")
-    public Flux<PostDto> getPosts(@RequestParam("userId") Integer userId) {
-        return postService.getPostByUserId(userId);
+    @GetMapping("/all-posts")
+    public Flux<UserPostRsDto> findAllPosts() {
+        return userPostService.getUserPosts();
     }
 
 }
