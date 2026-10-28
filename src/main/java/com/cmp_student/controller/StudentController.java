@@ -5,17 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cmp_student.dto.PostDto;
 import com.cmp_student.dto.StudentDto;
 import com.cmp_student.dto.StudentRsDto;
-<<<<<<< HEAD
-import com.cmp_student.service.PostService;
-=======
 import com.cmp_student.dto.UserPostRsDto;
->>>>>>> 3874107ad6775371d50942c776302c390be8014b
 import com.cmp_student.service.StudentService;
 import com.cmp_student.service.UserPostService;
 
