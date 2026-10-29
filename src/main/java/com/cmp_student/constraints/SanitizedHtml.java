@@ -1,5 +1,3 @@
-// 3. Constraints
-
 package com.cmp_student.constraints;
 
 import jakarta.validation.Constraint;
@@ -9,6 +7,8 @@ import jakarta.validation.Payload;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Safelist;
 
+import static com.cmp_student.constants.Constants.DANGERPUS_HTML_CODE;
+
 import java.lang.annotation.*;
 
 @Documented
@@ -16,7 +16,7 @@ import java.lang.annotation.*;
 @Target({ ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SanitizedHtml {
-    String message() default "El texto contiene contenido HTML no permitido o malicioso";
+    String message() default DANGERPUS_HTML_CODE;
 
     Class<?>[] groups() default {};
 
@@ -28,17 +28,11 @@ class SanitizedHtmlValidator implements ConstraintValidator<SanitizedHtml, Strin
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         if (value == null) {
-            return true; // Los nulos se manejan con @NotNull o @NotBlank por separado
+            return true;
         }
 
-        // Sanitizamos el texto usando una lista blanca estricta (ej. sin etiquetas o
-        // solo básicas)
-        // Safelist.basic() permite etiquetas formateadas básicas; Safelist.none()
-        // remueve todo HTML.
         String sanitizedValue = Jsoup.clean(value, Safelist.basic());
 
-        // Opcional: Si quieres rechazar el input en lugar de limpiarlo silenciosamente,
-        // puedes comparar si el texto original era diferente al sanitizado.
         return value.equals(sanitizedValue);
     }
 }
